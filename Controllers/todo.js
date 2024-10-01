@@ -33,9 +33,11 @@ let getById = async (req, res) => {
 };
 let create = async (req, res) => {
   let newtodo = req.body;
+  newtodo.userId=req.id;
+  console.log(newtodo);
   try {
     await todoModel.create(newtodo);
-    res.json({ message: "added successfully", data: await userModel.find().populate("userId") });
+    res.json({ message: "added successfully", data: await todoModel.find().populate("userId") });
   } catch {
     res.json({ message: "faield" });
   }
